@@ -1,33 +1,70 @@
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>USL League Rankings</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <img src="usl-logo.svg" alt="USL Logo" class="logo">
-    <h1>USL League Rankings</h1>
-  </header>
+<h2>League Rankings</h2>
 
-  <nav>
-    <button onclick="showPage('rankings')">Rankings</button>
-    <button onclick="showPage('matches')">Matches</button>
-  </nav>
+<table border="1" cellpadding="8">
+  <thead>
+    <tr>
+      <th>Pos</th>
+      <th>Team</th>
+      <th>PTS</th>
+      <th>W-D-L</th>
+      <th>GF-GA</th>
+      <th>GP</th>
+      <th>Award</th>
+    </tr>
+  </thead>
+  <tbody id="rankings"></tbody>
+</table>
 
-  <section id="rankings" class="page"></section>
-  <section id="matches" class="page hidden"></section>
+<script>
+const teams = [
+  { name: "Los Jaguares", pts: 425, record: "10-0-1", gfga: "113-47", gp: 11, award: "USL Prix Cup Champions" },
+  { name: "Chivas", pts: 410, record: "8-0-1", gfga: "91-56", gp: 9, award: "Western Champion, USL Prix Cup Finalist" },
+  { name: "Bayern Munich", pts: 200, record: "4-0-1", gfga: "23-9", gp: 5, award: "Semi-Finalist" },
+  { name: "CSTR", pts: 190, record: "2-0-1", gfga: "12-40", gp: 3, award: "Eastern Champions" },
+  { name: "FC Tulsa", pts: 115, record: "3-0-2", gfga: "13-33", gp: 5, award: "—" },
+  { name: "AC Milan", pts: 110, record: "2-0-2", gfga: "18-11", gp: 4, award: "Finalist" },
+  { name: "Rimberio FC", pts: 85, record: "1-0-2", gfga: "3-3", gp: 3, award: "USL Prix Cup Semi-Finalist" },
+  { name: "FC Wolves", pts: 30, record: "1-0-0", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Belt FC", pts: 30, record: "1-0-0", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Crabs United", pts: 30, record: "1-0-0", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Dynasty FC", pts: 30, record: "1-0-0", gfga: "0-0", gp: 1, award: "—" },
+  { name: "ATFL", pts: 30, record: "1-0-0", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Goat FC", pts: 30, record: "1-0-0", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Touch Palace", pts: 30, record: "1-0-1", gfga: "3-3", gp: 2, award: "—" },
+  { name: "Asphalt Green SC", pts: 30, record: "1-0-1", gfga: "0-3", gp: 2, award: "—" },
+  { name: "San Jose EQ", pts: 30, record: "1-0-1", gfga: "0-3", gp: 2, award: "—" },
+  { name: "United FC", pts: 0, record: "0-0-1", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Hype FC", pts: 0, record: "0-0-1", gfga: "0-0", gp: 1, award: "—" },
+  { name: "TUFF FC", pts: 0, record: "0-0-1", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Cuz FC", pts: 0, record: "0-0-1", gfga: "0-0", gp: 1, award: "—" },
+  { name: "Atletico La Paz", pts: 0, record: "0-0-1", gfga: "0-0", gp: 1, award: "—" },
+  { name: "NYC FC", pts: 0, record: "0-0-1", gfga: "0-0", gp: 1, award: "—" },
+  { name: "M.M.F.C", pts: 0, record: "0-0-1", gfga: "14-15", gp: 1, award: "—" },
+  { name: "Real Madrid", pts: 0, record: "0-0-1", gfga: "0-3", gp: 1, award: "—" },
+  { name: "Hajduk FC", pts: 0, record: "0-0-2", gfga: "13-51", gp: 2, award: "—" },
+  { name: "Valencia CF", pts: 0, record: "0-0-0", gfga: "0-0", gp: 0, award: "—" },
+  { name: "Marmalade FC", pts: 0, record: "0-0-2", gfga: "3-11", gp: 2, award: "—" },
+  { name: "USA", pts: 0, record: "0-0-3", gfga: "0-9", gp: 3, award: "—" },
+  { name: "Rayo", pts: 0, record: "0-0-4", gfga: "0-9", gp: 4, award: "—" }
+];
 
-  <script src="script.js"></script>
-</body>
-</html>
-<tr>
-  <td>2</td>
-  <td>FC Tulsa</td>
-  <td>30</td>
-  <td>3-1-0</td>
-  <td>12</td>
-  <td>8</td>
-</tr>
+// SORT BY POINTS DESCENDING
+teams.sort((a, b) => b.pts - a.pts);
+
+const tbody = document.getElementById("rankings");
+
+teams.forEach((team, index) => {
+  const row = document.createElement("tr");
+  row.innerHTML = `
+    <td>${index + 1}</td>
+    <td>${team.name}</td>
+    <td>${team.pts}</td>
+    <td>${team.record}</td>
+    <td>${team.gfga}</td>
+    <td>${team.gp}</td>
+    <td>${team.award}</td>
+  `;
+  tbody.appendChild(row);
+});
+</script>
